@@ -1,0 +1,12 @@
+{
+  "name": "letters-heart",
+  "version": "1.0.0",
+  "description": "Surpresa romântica",
+  "main": "script.js",
+  "scripts": {
+    "build": "tsc script.ts"
+  },
+  "dependencies": {
+    "typescript": "^5.0.0"
+  }
+} 
