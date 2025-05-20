@@ -11,13 +11,20 @@ class SurpriseApp {
         this.setupModalListeners();
     }
     initializeCards() {
-        // Data atual como referência
-        const today = new Date();
-        // Configura as datas de abertura para cada card
+        const baseDate = new Date(2025, 3, 14); // 14 de abril de 2025
+
+        const modal1Date = new Date(baseDate);
+        const modal2Date = new Date(baseDate);
+        modal2Date.setMonth(modal2Date.getMonth() + 1); // 14 de maio de 2025
+
+        const modal3Date = new Date(baseDate);
+        modal3Date.setMonth(modal3Date.getMonth() + 2); // 14 de junho de 2025
+
+
         this.cards = [
-            { id: 'modal1', openDate: new Date(today) },
-            { id: 'modal2', openDate: new Date(today.setMonth(today.getMonth() + 1)) },
-            { id: 'modal3', openDate: new Date(today.setMonth(today.getMonth() + 1)) }
+            { id: 'modal1', openDate: modal1Date },
+            { id: 'modal2', openDate: modal2Date },
+            { id: 'modal3', openDate: modal3Date }
         ];
     }
     setupEventListeners() {
@@ -34,7 +41,7 @@ class SurpriseApp {
         });
     }
     setupModalListeners() {
- 
+
         this.cards.forEach(card => {
             const modal = document.getElementById(card.id);
             if (modal) {
@@ -55,9 +62,9 @@ class SurpriseApp {
         return this.currentDate >= card.openDate;
     }
     startCountdown() {
-  
+
         this.updateCountdown();
-    
+
         setInterval(() => {
             this.updateCountdown();
         }, 1000);
@@ -65,7 +72,7 @@ class SurpriseApp {
     updateCountdown() {
         const now = new Date();
         const difference = this.targetDate.getTime() - now.getTime();
-        
+
         if (difference <= 0) {
             document.getElementById('days').textContent = '00';
             document.getElementById('hours').textContent = '00';
@@ -81,13 +88,13 @@ class SurpriseApp {
         const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
         const seconds = totalSeconds % 60;
 
- 
+
         document.getElementById('days').textContent = this.padNumber(days);
         document.getElementById('hours').textContent = this.padNumber(hours);
         document.getElementById('minutes').textContent = this.padNumber(minutes);
         document.getElementById('seconds').textContent = this.padNumber(seconds);
 
-   
+
         console.log('Tempo restante:', {
             dias: days,
             horas: hours,
